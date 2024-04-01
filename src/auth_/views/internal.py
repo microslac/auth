@@ -4,7 +4,7 @@ from micro.jango.views import BaseViewSet, post
 from rest_framework import status
 from rest_framework.response import Response
 
-from auth_.serializers import AuthSerializer
+from auth_.serializers import AuthSerializer, CrudSerializer
 from auth_.services import AuthService
 
 
@@ -31,25 +31,25 @@ class InternalViewSet(BaseViewSet):
     @post(url_path="lookup")
     def lookup(self, request):
         data = request.data.copy()
-        serializer = IdSerializer(data=data)
+        serializer = CrudSerializer(data=data)
         if serializer.is_valid(raise_exception=True):
-            auth = AuthService.get_auth(serializer.pop("id"))  # TODO: exists
+            auth = AuthService.get_auth(serializer.pop("auth"))  # TODO: exists
             resp = dict(auth=IdSerializer(auth).data)
             return Response(data=resp, status=status.HTTP_200_OK)
 
     @post(url_path="info")
     def info(self, request):
         data = request.data.copy()
-        serializer = IdSerializer(data=data)
+        serializer = CrudSerializer(data=data)
         if serializer.is_valid(raise_exception=True):
-            auth = AuthService.get_auth(serializer.pop("id"))
+            auth = AuthService.get_auth(serializer.pop("auth"))
             resp = dict(auth=AuthSerializer(auth).data)
             return Response(data=resp, status=status.HTTP_200_OK)
 
     @post(url_path="destroy")
     def destroy_(self, request):
         data = request.data.copy()
-        serializer = IdSerializer(data=data)
+        serializer = CrudSerializer(data=data)
         if serializer.is_valid(raise_exception=True):
-            AuthService.destroy_auth(data.pop("id"))
+            AuthService.destroy_auth(data.pop("auth"))
             return Response(status=status.HTTP_200_OK)

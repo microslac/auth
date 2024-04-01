@@ -35,3 +35,7 @@ class AuthSerializer(BaseModelSerializer):
         extra_data = data.pop("data", {})
         data.update(extra_data)
         return data
+
+
+class CrudSerializer(BaseSerializer):
+    auth = serializers.CharField(required=True, allow_blank=False)
