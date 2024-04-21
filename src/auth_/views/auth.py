@@ -16,8 +16,7 @@ class AuthViewSet(BaseViewSet):
         if serializer.is_valid(raise_exception=True):
             email, password = serializer.extract("email", "password")
             access, _ = AuthService.signup(email=email, password=password)
-            resp = dict(access=access)
-            return Response(resp, status=status.HTTP_200_OK)
+            return Response(dict(access=access), status=status.HTTP_200_OK)
 
     @post(url_path="login", **public)
     def login(self, request):
@@ -26,8 +25,15 @@ class AuthViewSet(BaseViewSet):
         if serializer.is_valid(raise_exception=True):
             email, password = serializer.extract("email", "password")
             access, _ = AuthService.login(email=email, password=password)
-            resp = dict(access=access)
-            return Response(resp, status=status.HTTP_200_OK)
+            return Response(dict(access=access), status=status.HTTP_200_OK)
+
+    @post(url_path="consume", **public)
+    def consume(self, request):
+        data = request.data.copy()
+        serializer = RefreshSerializer(data=data)
+        if serializer.is_valid(raise_exception=True):
+            access, _ = AuthService.refresh(serializer.validated_data["refresh"])
+            return Response(dict(access=access), status=status.HTTP_200_OK)
 
     @post(url_path="verify", **public)
     def verify(self, request):

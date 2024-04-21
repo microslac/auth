@@ -11,7 +11,6 @@ DJANGO_APPS = (
 THIRD_PARTY_APPS = (
     "authtools",
     "corsheaders",
-    "social_django",
     "rest_framework",
     "rest_framework.authtoken",
     "rest_framework_simplejwt.token_blacklist",
