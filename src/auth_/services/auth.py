@@ -11,6 +11,7 @@ from rest_framework_simplejwt.tokens import RefreshToken
 
 from auth_.auth.authentication import JWTAuthentication
 from auth_.constants import AuthSource
+from auth_.exceptions.auth import DuplicatedSocialEmail
 from auth_.models import Auth
 from auth_.simplejwt.tokens import AppRefreshToken
 
@@ -48,8 +49,8 @@ class AuthService(BaseService):
             token.set_exp()
             token.set_iat()
             return access, str(token)
-        except TokenError:
-            raise ApiException(error="invalid_refresh_token")
+        except TokenError as exc:
+            raise ApiException(error="invalid_refresh_token") from exc
 
     @classmethod
     def obtain(cls, auth: Auth, team_id: str) -> tuple[str, str]:
@@ -71,8 +72,8 @@ class AuthService(BaseService):
             auth.set_password(password)
             auth.save()
             return auth
-        except IntegrityError:
-            raise ApiException(error="already_exists")
+        except IntegrityError as exc:
+            raise ApiException(error="already_exists") from exc
 
     @classmethod
     def get_or_create_social_auth(cls, email: str, source: str, data: dict) -> Auth:
@@ -83,8 +84,8 @@ class AuthService(BaseService):
                 auth.set_unusable_password()
                 auth.save()
             return auth
-        except IntegrityError:
-            raise ApiException(error="already_exists")
+        except IntegrityError as exc:
+            raise DuplicatedSocialEmail(error="duplicated_social_email") from exc
 
     @classmethod
     def get_auth(cls, auth_id: str) -> Auth:

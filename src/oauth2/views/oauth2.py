@@ -1,10 +1,11 @@
 from django.shortcuts import redirect
 from micro.jango.views import BaseViewSet
+from rest_framework import status
 from rest_framework.decorators import action
 from rest_framework.request import Request
+from rest_framework.response import Response
 
-from oauth2.socials.context import SocialContext
-from oauth2.socials.strategy import SocialStrategy
+from oauth2.services.oauth2 import Oauth2Service
 
 
 class Oauth2ViewSet(BaseViewSet):
@@ -12,15 +13,14 @@ class Oauth2ViewSet(BaseViewSet):
     permission_classes = ()
 
     @action(methods=["GET"], detail=False)
-    def authorize(self, request: Request, social_name: str = ""):
-        strategy = SocialStrategy.factory(social_name, request=request)
-        context = SocialContext(strategy=strategy)
-        authorization_url, state = context.get_authorization_url()
-        return redirect(authorization_url)
+    def authorize(self, request: Request, source: str = ""):
+        service = Oauth2Service(source=source, request=request)
+        authorization_url = service.create_authorization_url()
+        resp = dict(authorization_url=authorization_url)
+        return Response(resp, status=status.HTTP_200_OK)
 
     @action(methods=["GET"], detail=False)
-    def callback(self, request: Request, social_name: str = ""):
-        strategy = SocialStrategy.factory(social_name, request=request)
-        context = SocialContext(strategy=strategy)
-        authorized_url = context.create_authorized_response()
+    def callback(self, request: Request, source: str = ""):
+        service = Oauth2Service(source=source, request=request)
+        authorized_url = service.create_authorized_url()
         return redirect(authorized_url)
