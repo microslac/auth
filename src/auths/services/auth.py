@@ -9,11 +9,11 @@ from rest_framework.request import Request
 from rest_framework_simplejwt.exceptions import TokenError
 from rest_framework_simplejwt.tokens import RefreshToken
 
-from auth_.auth.authentication import JWTAuthentication
-from auth_.constants import AuthSource
-from auth_.exceptions.auth import DuplicatedSocialEmail
-from auth_.models import Auth
-from auth_.simplejwt.tokens import AppRefreshToken
+from auths.auth.authentication import JWTAuthentication
+from auths.constants import AuthSource
+from auths.exceptions.auth import DuplicatedSocialEmail
+from auths.models import Auth
+from auths.simplejwt.tokens import AppRefreshToken
 
 
 class AuthService(BaseService):

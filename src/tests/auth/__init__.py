@@ -2,7 +2,7 @@ from tests.base import ApiTestBase
 from types import SimpleNamespace
 
 from tests.factories import AuthFactory
-from auth_.models import Auth
+from auths.models import Auth
 
 
 class AuthTestBase(ApiTestBase):

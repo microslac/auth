@@ -8,9 +8,9 @@ from micro.jango.exceptions import ApiException
 from micro.jango.services import BaseService
 from rest_framework.request import Request
 
-from auth_.exceptions.auth import DuplicatedSocialEmail
-from auth_.services.auth import AuthService
-from auth_.simplejwt.tokens import RefreshToken
+from auths.exceptions.auth import DuplicatedSocialEmail
+from auths.services.auth import AuthService
+from auths.simplejwt.tokens import RefreshToken
 from oauth2.services.client import oauth, providers
 from oauth2.services.social import SocialInfo
 

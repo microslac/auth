@@ -1,7 +1,7 @@
 from micro.jango.tests import UnitTestBase
 
-from auth_.constants import AuthSource
-from auth_.models import Auth
+from auths.constants import AuthSource
+from auths.models import Auth
 
 
 class TestAuthModel(UnitTestBase):

@@ -1,4 +1,4 @@
-AUTH_USER_MODEL = "auth_.Auth"
+AUTH_USER_MODEL = "auths.Auth"
 
 AUTHENTICATION_BACKENDS = [
     "social_core.backends.google.GoogleOAuth2",

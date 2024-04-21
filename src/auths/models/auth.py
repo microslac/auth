@@ -5,7 +5,7 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 from micro.jango.models.fields import ShortIdField
 
-from auth_.constants import AuthSource
+from auths.constants import AuthSource
 
 
 class Auth(AbstractEmailUser):
