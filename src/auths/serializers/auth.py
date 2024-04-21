@@ -1,7 +1,7 @@
 from micro.jango.serializers import BaseModelSerializer, BaseSerializer
 from rest_framework import serializers
 
-from auth_.models import Auth
+from auths.models import Auth
 
 
 class SignupSerializer(BaseSerializer):

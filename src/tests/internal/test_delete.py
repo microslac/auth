@@ -1,4 +1,4 @@
-from auth_.models import Auth
+from auths.models import Auth
 from tests.factories import AuthFactory
 from tests.internal import InternalTestBase
 

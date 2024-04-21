@@ -4,8 +4,8 @@ from micro.jango.views import BaseViewSet, post
 from rest_framework import status
 from rest_framework.response import Response
 
-from auth_.serializers import AuthSerializer, CrudSerializer
-from auth_.services import AuthService
+from auths.serializers import AuthSerializer, CrudSerializer
+from auths.services import AuthService
 
 
 class InternalViewSet(BaseViewSet):

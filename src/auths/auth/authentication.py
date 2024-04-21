@@ -11,7 +11,7 @@ from rest_framework.request import Request
 from rest_framework_simplejwt.exceptions import InvalidToken, TokenError
 from rest_framework_simplejwt.tokens import AccessToken, Token
 
-from auth_.models import Auth
+from auths.models import Auth
 
 
 class BaseAuthentication(authentication.BaseAuthentication, ABC):

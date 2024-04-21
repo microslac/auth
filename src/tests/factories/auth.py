@@ -2,7 +2,7 @@ import factory
 from factory.django import DjangoModelFactory
 from faker import Factory
 
-from auth_.models import Auth
+from auths.models import Auth
 
 __all__ = ["AuthFactory"]
 

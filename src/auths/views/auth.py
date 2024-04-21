@@ -2,8 +2,8 @@ from micro.jango.views import BaseViewSet, post
 from rest_framework import status
 from rest_framework.response import Response
 
-from auth_.serializers import LoginSerializer, ObtainSerializer, RefreshSerializer, SignupSerializer
-from auth_.services import AuthService
+from auths.serializers import LoginSerializer, ObtainSerializer, RefreshSerializer, SignupSerializer
+from auths.services import AuthService
 
 public = dict(permission_classes=(), authentication_classes=())
 

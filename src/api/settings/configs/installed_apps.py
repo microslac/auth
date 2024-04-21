@@ -16,7 +16,7 @@ THIRD_PARTY_APPS = (
     "rest_framework_simplejwt.token_blacklist",
 )
 
-APP_AUTH = "auth_"
+APP_AUTH = "auths"
 APP_OAUTH2 = "oauth2"
 
 LOCAL_APPS = (
