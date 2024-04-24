@@ -4,6 +4,7 @@ from datetime import timedelta
 from urllib.parse import urlencode
 
 from authlib.integrations.django_client import DjangoOAuth2App
+from django.conf import settings
 from micro.jango.exceptions import ApiException
 from micro.jango.services import BaseService
 from rest_framework.request import Request
@@ -64,8 +65,10 @@ class Oauth2Service(BaseService):
 
     def _build_redirect_uri(self) -> str:
         redirect_uri: str = self.request.build_absolute_uri()
-        redirect_uri: str = redirect_uri.replace("authorize", "callback", 1)
-        redirect_uri: str = re.sub(r"\?.*$", "", redirect_uri)
+        redirect_uri = redirect_uri.replace("authorize", "callback", 1)
+        redirect_uri = re.sub(r"\?.*$", "", redirect_uri)
+        if settings.FORCE_TLS:
+            redirect_uri = redirect_uri.replace("http", "https", 1)
         return redirect_uri
 
     def _get_request_origin(self) -> str:

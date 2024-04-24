@@ -12,6 +12,8 @@ PROJECT_DIR = BASE_DIR.parent.parent
 
 DEBUG = env.int("DEBUG", 0)
 
+FORCE_TLS = env.int("FORCE_TLS", 0)
+
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = env("SECRET_KEY")
 
